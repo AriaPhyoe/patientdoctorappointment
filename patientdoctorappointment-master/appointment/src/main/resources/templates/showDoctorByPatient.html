@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Patient Home Page</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="../patient/assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../patient/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../patient/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../patient/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../patient/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../patient/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="../patient/assets/css/main.css" rel="stylesheet">
+<style>
+  /* Table Container */
+.table-responsive {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: var(--default-font);
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  font-weight: lighter;
+  font-family: var(--default-font);
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border: 1px  #ddd;
+  font-size: 16px;
+  font-family: var(--default-font);
+}
+
+td {
+  background-color: #ffffff;
+  font-family: var(--default-font);
+}
+
+th {
+  background-color: #007bff;
+
+}
+
+/* Hover Effect */
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Action Buttons */
+.btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-family: var(--default-font);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: white;
+  border: none;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Button Alignment */
+td a {
+  margin: 0 5px;
+}
+
+/* Table Font */
+table, th, td {
+  font-family: var(--default-font);
+}
+
+/* General Section Styling */
+.testimonials {
+  padding: 60px 0;
+  background-color: #f9f9f9;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.section-title p {
+  font-size: 1rem;
+  color: #777;
+  margin-top: 10px;
+}
+
+/* Swiper Styling */
+.swiper {
+  overflow: hidden;
+}
+
+.swiper-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.swiper-slide {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Testimonial Item Styling */
+.testimonial-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Star Ratings */
+.stars i {
+  color: #fbc02d;
+  margin-right: 3px;
+}
+
+/* Doctor Description */
+.testimonial-item p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 15px 0;
+}
+
+/* Profile Section */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile img {
+  border-radius: 50%;
+  border: 3px solid #ddd;
+}
+
+.profile h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.profile h4 {
+  font-size: 1rem;
+  color: #666;
+  margin: 5px 0 0;
+}
+
+/* Book Button */
+.testimonial-item button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.testimonial-item button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .swiper-wrapper {
+    flex-direction: column;
+  }
+
+  .swiper-slide {
+    min-width: 100%;
+  }
+
+  .testimonial-item {
+    margin-bottom: 20px;
+  }
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.profile-logo {
+    width: 60px; /* Profile image size */
+    height: 60px;
+    border-radius: 50%; /* Make it circular */
+    border: 2px solid #fff; /* Optional: Border for visual appeal */
+}
+/* General Cell Styling */
+td {
+    padding: 10px; /* Add space around the content */
+    border: 1px solid #e0e0e0; /* Light border for separation */
+    font-family: 'Arial', sans-serif; /* Modern sans-serif font */
+    font-size: 14px; /* Clear, readable text */
+    color: #333; /* Neutral text color */
+    vertical-align: top; /* Align content to the top */
+    background-color: #f9f9f9; /* Subtle background for the cell */
+    border-radius: 5px; /* Slightly rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Nested Table Styling */
+td table {
+    width: 100%; /* Take full width of the cell */
+    border-collapse: collapse; /* Remove spacing between rows */
+    margin: 0; /* No extra margin */
+}
+
+td table tr {
+    border-bottom: 1px solid #e6e6e6; /* Light border between rows */
+}
+
+td table tr:last-child {
+    border-bottom: none; /* No border for the last row */
+}
+
+td table td {
+    padding: 8px 0; /* Space above and below text */
+    font-size: 13px; /* Slightly smaller text for nested content */
+    color: #555; /* Softer text color for differentiation */
+    word-wrap: break-word; /* Handle long text wrapping */
+}
+
+/* Date and Time Styling */
+td table td:before {
+    content: '⏰ '; /* Add an icon for date/time */
+    font-size: 12px; /* Slightly smaller icon size */
+    color: #007bff; /* Blue color for the icon */
+    margin-right: 5px; /* Space between icon and text */
+}
+
+/* Hover Effect for Slots */
+td table tr:hover {
+    background-color: #f0f8ff; /* Light blue background on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Border Radius for Nested Table */
+td table {
+    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+/* General styling for the status column */
+td[th\\:text] {
+    text-align: center; /* Center the text */
+    padding: 8px 15px; /* Padding for a simple button-like appearance */
+    font-size: 14px; /* Font size for the text */
+    font-weight: bold; /* Bold text */
+    color: #fff; /* Default text color white */
+    border-radius: 4px; /* Slightly rounded corners */
+    cursor: pointer; /* Pointer cursor to indicate interactiveness */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Default color for the status (Green for success) */
+td[th\\:text] {
+    background-color: #28a745; /* Green */
+}
+
+/* Hover effect */
+td[th\\:text]:hover {
+    background-color: #218838; /* Darker green when hovered */
+}
+
+/* Pending status - Yellow */
+td[th\\:text][data-status="Pending"] {
+    background-color: #ffc107; /* Yellow */
+    color: #212529; /* Darker text color for better contrast */
+}
+
+/* Completed status - Blue */
+td[th\\:text][data-status="Completed"] {
+    background-color: #007bff; /* Blue */
+}
+
+/* Cancelled status - Red */
+td[th\\:text][data-status="Cancelled"] {
+    background-color: #dc3545; /* Red */
+}
+
+</style>
+  
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="patientHome.html" class="logo d-flex align-items-center me-auto">
+        <img src="../patient/assets/img/logo.png" alt="">
+        <h1 class="sitename">City Star</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#" th:href="@{/patient/main}" >Home</a></li>
+          <li><a href="#" th:href="@{/patient/about}">About</a></li>
+          
+          <li><a href="#" th:href="@{/patient/showApp}">History</a></li>
+		  <li><a href="#" th:href="@{/patient/showAllDoctor}" class="active">Doctors</a></li>
+          <li><a href="#" th:href="@{/patient/contactPage}">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="#" th:href="@{/patient/addAppointment}">Add Appointment</a>
+	  <div class="profile-section d-flex align-items-center ms-3" th:each="ad : ${patient}">
+	  	            <a href="#" th:href="@{/patient/showPatientProfile}"><img src="https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg" alt="Profile Logo" class="profile-logo rounded-circle"></a>
+	  				<span class="greeting-text ms-2">Hi, 
+	  				    <span th:text="' ' + ${ad.firstname} + ' ' + ${ad.lastname}+'!'"></span>
+	  				</span>
+	  	        </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Featured Services Section -->
+    <section id="featured-services" class="featured-services section light-background">
+		<div class="container"></div>
+    </section><!-- /Featured Services Section -->
+
+    <!-- Testimonials Section -->
+	<section id="testimonials" class="testimonials section light-background">
+
+	      <!-- Section Title -->
+	      <div class="container section-title" data-aos="fade-up">
+	        <h2>Our Doctors</h2>
+	        <p>Meet our experienced medical professionals who are dedicated to providing exceptional healthcare services.</p>
+	      </div><!-- End Section Title -->
+	    
+		  <div class="container"   >
+		    <div class="swiper init-swiper" >
+		      
+			  <div class="swiper-wrapper">
+			    <div  th:each="doctor : ${doctorlist}">
+			      <div class="testimonial-item">
+			        <!-- Star Ratings -->
+			        <div class="stars">
+			          <i class="bi bi-star-fill"></i>
+			          <i class="bi bi-star-fill"></i>
+			          <i class="bi bi-star-fill"></i>
+			          <i class="bi bi-star-fill"></i>
+			          <i class="bi bi-star-fill"></i>
+			        </div>
+
+			        <!-- Doctor Description -->
+			        <p th:text="${doctor.description}"></p>
+					
+
+			        <!-- Profile Section -->
+			        <div class="profile mt-auto" style="display: flex; align-items: center; gap: 20px;">
+			          <!-- Profile Image -->
+			          <img 
+			            src="https://www.eka.care/_next/image?url=https%3A%2F%2Fdoctoronboarding.eka.care%2Ff8404ff7-2a08-47d0-9a8b-d39735174c63.png&w=3840&q=100" 
+			            class="testimonial-img"  
+			            alt="Doctor Avatar" 
+			            style="width: 100px; height: 100px; object-fit: cover;"
+			          />
+			          
+			          <!-- Doctor Information -->
+			          <div>
+			            <h3 th:text="'Dr. ' + ${doctor.firstname} + ' ' + ${doctor.lastname}"></h3>
+			            <h4 th:text="${doctor.specialty}"></h4>
+						<h4 th:text="${doctor.yearsOfExperience}+' Experiences'"></h4>
+			          </div>
+					  
+			        </div>
+					<button><a th:href="@{/patient/Docdetail/{id}(id=${doctor.doctorId})}">Book</a></button>
+			      </div>
+			    </div>
+			  </div>
+	    
+	    </section><!-- /Testimonials Section -->
+    
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+     
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer position-relative light-background">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="index.html" class="logo d-flex align-items-center">
+            <span class="sitename">City Star Hospital</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Theik Pan St, Between 65th & 66th Sts, Mandalay</p>
+            <p>Myanmar</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>09797008700</span></p>
+            <p><strong>Email:</strong> <span>citystarmandalay@gmail.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+  
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Departments</a></li>
+            <li><a href="#">Patient Services</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Specialties</h4>
+          <ul>
+            <li><a href="#">Cardiology</a></li>
+            <li><a href="#">Pediatrics</a></li>
+            <li><a href="#">Orthopedics</a></li>
+            <li><a href="#">Neurology</a></li>
+            <li><a href="#">General Surgery</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Subscribe to Updates</h4>
+          <p>Stay informed about the latest health news, tips, and hospital services by subscribing to our newsletter!</p>
+          <form action="forms/newsletter.php" method="post" class="php-email-form">
+            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">City Star Hospital</strong><span> All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="#">BootstrapMade</a> Dist<a href="#">City Star Hospital</a>
+      </div>
+    </div>
+  
+  </footer>
+  
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="../patient/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../patient/assets/vendor/php-email-form/validate.js"></script>
+  <script src="../patient/assets/vendor/aos/aos.js"></script>
+  <script src="../patient/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../patient/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="../patient/assets/js/main.js"></script>
+
+</body>
+
+</html>

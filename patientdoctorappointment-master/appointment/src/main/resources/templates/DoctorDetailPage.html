@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Patient Home Page</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link th:href="@{/patient/assets/img/favicon.png}" rel="icon">
+  <link th:href="@{/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link th:href="@{/patient/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/patient/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{/patient/assets/vendor/aos/aos.css}" rel="stylesheet">
+  <link th:href="@{/patient/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+  <link th:href="@{/patient/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link th:href="@{/patient/assets/css/main.css}" rel="stylesheet">
+
+<!--<style>
+  /* Table Container */
+	.table-responsive {
+	  margin-top: 20px;
+	  margin-bottom: 20px;
+	  padding: 20px;
+	  background-color: #f9f9f9;
+	  border-radius: 10px;
+	  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	  font-family: var(--default-font);
+	}
+	
+	/* Table Styling */
+	table {
+	  width: 100%;
+	  border-collapse: collapse;
+	}
+	
+	thead {
+	  background-color: #007bff;
+	  color: #fff;
+	  text-align: center;
+	  font-weight: lighter;
+	  font-family: var(--default-font);
+	}
+	
+	th, td {
+	  padding: 12px;
+	  text-align: center;
+	  border: 1px  #ddd;
+	  font-size: 16px;
+	  font-family: var(--default-font);
+	}
+	
+	td {
+	  background-color: #ffffff;
+	  font-family: var(--default-font);
+	}
+	
+	th {
+	  background-color: #007bff;
+	
+	}
+	
+	/* Hover Effect */
+	tbody tr:hover {
+	  background-color: #f1f1f1;
+	}
+	
+	/* Action Buttons */
+	.btn {
+	  padding: 6px 12px;
+	  font-size: 14px;
+	  border-radius: 5px;
+	  text-decoration: none;
+	  font-family: var(--default-font);
+	}
+	
+	.btn-primary {
+	  background-color: #007bff;
+	  color: white;
+	  border: none;
+	}
+	
+	.btn-primary:hover {
+	  background-color: #0056b3;
+	}
+	
+	.btn-warning {
+	  background-color: #ffc107;
+	  color: white;
+	  border: none;
+	}
+	
+	.btn-warning:hover {
+	  background-color: #e0a800;
+	}
+	
+	.btn-danger {
+	  background-color: #dc3545;
+	  color: white;
+	  border: none;
+	}
+	
+	.btn-danger:hover {
+	  background-color: #c82333;
+	}
+	
+	/* Button Alignment */
+	td a {
+	  margin: 0 5px;
+	}
+	
+	/* Table Font */
+	table, th, td {
+	  font-family: var(--default-font);
+	}
+	
+	/* General Section Styling */
+	.testimonials {
+	  padding: 60px 0;
+	  background-color: #f9f9f9;
+	}
+	
+	.section-title {
+	  text-align: center;
+	  margin-bottom: 40px;
+	}
+	
+	.section-title h2 {
+	  font-size: 2.5rem;
+	  font-weight: bold;
+	  color: #333;
+	}
+	
+	.section-title p {
+	  font-size: 1rem;
+	  color: #777;
+	  margin-top: 10px;
+	}
+	
+	/* Swiper Styling */
+	.swiper {
+	  overflow: hidden;
+	}
+	
+	.swiper-wrapper {
+	  display: flex;
+	  gap: 20px;
+	}
+	
+	.swiper-slide {
+	  flex: 1;
+	  min-width: 300px;
+	}
+	
+	/* Testimonial Item Styling */
+	.testimonial-item {
+	  background: #fff;
+	  padding: 20px;
+	  border-radius: 10px;
+	  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: space-between;
+	  transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+	
+	.testimonial-item:hover {
+	  transform: translateY(-5px);
+	  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	}
+	
+	/* Star Ratings */
+	.stars i {
+	  color: #fbc02d;
+	  margin-right: 3px;
+	}
+	
+	/* Doctor Description */
+	.testimonial-item p {
+	  font-size: 0.9rem;
+	  color: #555;
+	  margin: 15px 0;
+	}
+	
+	/* Profile Section */
+	.profile {
+	  display: flex;
+	  align-items: center;
+	  gap: 20px;
+	}
+	
+	.profile img {
+	  border-radius: 50%;
+	  border: 3px solid #ddd;
+	}
+	
+	.profile h3 {
+	  font-size: 1.2rem;
+	  font-weight: bold;
+	  color: #333;
+	  margin: 0;
+	}
+	
+	.profile h4 {
+	  font-size: 1rem;
+	  color: #666;
+	  margin: 5px 0 0;
+	}
+	
+	/* Book Button */
+	.testimonial-item button {
+	  margin-top: 15px;
+	  padding: 10px 20px;
+	  font-size: 1rem;
+	  font-weight: bold;
+	  color: #fff;
+	  background-color: #007bff;
+	  border: none;
+	  border-radius: 5px;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease;
+	}
+	
+	.testimonial-item button:hover {
+	  background-color: #0056b3;
+	}
+	
+	/* Responsive Design */
+	@media (max-width: 768px) {
+	  .swiper-wrapper {
+	    flex-direction: column;
+	  }
+	
+	  .swiper-slide {
+	    min-width: 100%;
+	  }
+	
+	  .testimonial-item {
+	    margin-bottom: 20px;
+	  }
+	}
+
+
+
+</style>-->
+  <style>
+	/* General container styling */
+	.container {
+	    display: flex;
+	    gap: 20px;
+	    max-width: 2000px;
+	    margin: 0 auto;
+	    padding: 20px;
+	    background-color: #f9f9f9;
+	}
+
+	/* Doctor Information Section */
+	.doctor-info {
+	    flex: 1; /* Narrow width */
+	    background-color: #ffffff;
+	    border: 1px solid #ddd;
+	    border-radius: 8px;
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	    padding: 20px;
+	    text-align: center;
+	}
+
+	.doctor-info img {
+	    width: 120px;
+	    height: 120px;
+	    border-radius: 50%;
+	    object-fit: cover;
+	    margin-bottom: 15px;
+	}
+
+	.doctor-info h2 {
+	    font-size: 22px;
+	    margin-bottom: 10px;
+	}
+
+	.doctor-info .details h3 {
+	    font-size: 18px;
+	    margin: 10px 0;
+	}
+
+	.doctor-info .details p {
+	    font-size: 16px;
+	    margin: 5px 0;
+	}
+
+	.doctor-info .fee span {
+	    font-weight: bold;
+	    color: #007BFF;
+	}
+
+	/* Schedule Information Section */
+	.schedule-info {
+	    flex: 2; /* Wide width */
+	    background-color: #ffffff;
+	    border: 1px solid #ddd;
+	    border-radius: 8px;
+	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	    padding: 20px;
+	}
+
+	.schedule-info h2 {
+	    font-size: 22px;
+	    margin-bottom: 20px;
+	    text-align: center;
+	}
+
+	.table {
+	    width: 100%;
+	    border-collapse: collapse;
+	}
+
+	.table th,
+	.table td {
+	    padding: 12px;
+	    text-align: center;
+	    border: 1px solid #ddd;
+	}
+
+	.table th {
+	    background-color: #007BFF;
+	    color: #fff;
+	}
+
+	.table tbody tr:hover {
+	    background-color: #f1f1f1;
+	}
+
+	.table button {
+	    padding: 8px 12px;
+	    border: none;
+	    border-radius: 5px;
+	    background-color: #007BFF;
+	    color: #fff;
+	    cursor: pointer;
+	}
+
+	.table button:hover {
+	    background-color: #0056b3;
+	}
+
+  </style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="patientHome.html" class="logo d-flex align-items-center me-auto">
+        <img th:src="@{/patient/assets/img/logo.png}" alt="Logo">
+        <h1 class="sitename">City Star</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#" th:href="@{/patient/main}">Home</a></li>
+          <li><a href="#" th:href="@{/patient/about}">About</a></li>
+          
+          <li><a href="#" th:href="@{/patient/showApp}">History</a></li>
+		  <li><a href="#" th:href="@{/patient/showAllDoctor}">Doctors</a></li>
+          <li><a href="#" th:href="@{/patient/contactPage}">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="#" th:href="@{/patient/addAppointment}">Add Appointment</a>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+	
+    <section id="featured-services" class="featured-services section light-background">
+
+      <div class="container">
+		
+    
+        
+      </div>
+    
+    </section><!-- /Featured Services Section -->
+<!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section light-background">
+		
+
+		<div class="container">
+		    <!-- Doctor Information Section -->
+		    <div class="doctor-info">
+		        <div class="profile">
+		            <img src="https://t3.ftcdn.net/jpg/06/48/69/42/360_F_648694278_haC94bdL26EedqLMIbMpLACqzxwuvq4f.jpg" th:src="@{'/images/' + ${doctor.profile}}"  alt="Doctor Image">
+		        </div>
+		        <div class="info">
+		            <h2>Doctor Information</h2>
+		            <div class="details">
+		                <h3 th:text="'Dr. '+${doctor.firstname + ' ' + doctor.lastname}"></h3>
+		                <p>Experience: <span class="experience" th:text="${doctor.yearsOfExperience + ' Years'}"></span></p>
+		                <p class="about" th:text="${doctor.description}">About</p>
+		               
+		                <p class="fee">Appointment Fee: <span th:text=" ${doctor.formattedConsultationFee}+' MMK ' "></span></p>
+		            </div>
+		        </div>
+		    </div>
+
+		    <!-- Available Schedule Section -->
+		    <div class="schedule-info">
+		        <div class="section-title" data-aos="fade-up">
+		            <h2>Available Schedule Date</h2>
+		        </div>
+		        <div class="table-responsive" data-aos="fade-up" data-aos-delay="100">
+		            <table class="table table-bordered table-striped">
+		                <thead class="table-light">
+		                    <tr>
+		                        <th>Doctor Name</th>
+		                        <th>Available Date</th>
+		                        <th>Available Time</th>
+		                        <th>Actions</th>
+		                    </tr>
+		                </thead>
+		                <tbody>
+		                    <tr th:each="slot : ${doctor.assigned}" th:if="${slot.isBooked}">
+		                        <td th:text="'Dr.' + ${doctor.firstname + ' ' + doctor.lastname}"></td>
+		                        <td th:text="${slot.appointmentDate}"></td>
+		                        <td th:text="${slot.startingTime + ' - ' + slot.endingTime}"></td>
+		                        <td>
+		                            <form th:action="@{/patient/addAppointment/{assignedId}(assignedId=${slot.id})}" method="post">
+		                                <button type="submit">Book</button>
+		                                <button type="cancel">Cancel</button>
+		                            </form>
+		                        </td>
+		                    </tr>
+		                </tbody>
+		            </table>
+		        </div>
+		    </div>
+		</div>
+    
+    </section><!-- /Testimonials Section -->
+	<section id="services" class="services section light-background">
+
+	      <!-- Section Title -->
+	      
+	    
+	    </section><!-- /Appointment Details Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script th:src="@{/patient/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/patient/assets/vendor/php-email-form/validate.js}"></script>
+  <script th:src="@{/patient/assets/vendor/aos/aos.js}"></script>
+  <script th:src="@{/patient/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+  <script th:src="@{/patient/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+  <!-- Main JS File -->
+  <script th:src="@{/patient/assets/js/main.js}"></script>
+
+</body>
+
+</html>

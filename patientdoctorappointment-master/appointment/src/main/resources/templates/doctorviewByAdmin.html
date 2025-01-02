@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Doctor View By Admin</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+      name="viewport"
+    />
+    <link
+      rel="icon"
+      href="../assets/img/kaiadmin/favicon.ico"
+      type="image/x-icon"
+    />
+
+    <!-- Fonts and icons -->
+    <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["../assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="../assets/css/kaiadmin.min.css" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <style>
+	
+	</style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="dark">
+            <a href="index.html" class="logo">
+              <img
+                src="../assets/img/kaiadmin/favicon.png"
+                alt="navbar brand"
+                class="navbar-brand"
+                height="20"
+              />
+              <strong style="color: aliceblue; padding: 5px;">CityStar</strong>
+            </a>
+            <div class="nav-toggle">
+              <button class="btn btn-toggle toggle-sidebar">
+                <i class="gg-menu-right"></i>
+              </button>
+              <button class="btn btn-toggle sidenav-toggler">
+                <i class="gg-menu-left"></i>
+              </button>
+            </div>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
+          </div>
+          <!-- End Logo Header -->
+        </div>
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+              <li class="nav-item ">
+                <a
+				href="#" 
+				  th:href="@{/admin/main}"
+                  class="collapsed"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-home"></i>
+                  <p>Admin Dashboard</p>
+                  
+                </a>
+                
+              </li>
+              <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                  <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <h4 class="text-section">Management</h4>
+              </li>
+              <li class="nav-item ">
+                <a data-bs-toggle="collapse" href="#base">
+                  <i class="far fa-user"></i>
+                  <p>Patient</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="base">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="#" th:href="@{/admin/registerPatient}">
+                        <span class="sub-item">Register</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" th:href="@{/admin/showPatient}">
+                        <span class="sub-item">View</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item active">
+                <a data-bs-toggle="collapse" href="#sidebarLayouts">
+                  <i class="fas fa-user-md"></i>
+                  <p>Doctor</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse" id="sidebarLayouts">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="#" th:href="@{/admin/registerDoctor}">
+                        <span class="sub-item">Register</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" th:href="@{/admin/showDoctor}">
+                        <span class="sub-item">View</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              
+              <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                  <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <h4 class="text-section">Interface</h4>
+              </li>
+              
+              
+              
+			  <li class="nav-item">
+                  <a  href="#" th:href="@{/admin/showAppointment}">
+                    <i class="fas fa-file-signature"></i>
+                    <p>Requests</p>
+                  </a>
+                  
+                </li>				
+  			  <li class="nav-item">
+  	            <a  href="#" th:href="@{/admin/showFinishedAppointment}">
+  	              <i class="fas fa-eye"></i>
+  	              <p>Appointments</p>
+  	            </a>
+  	            
+  	          </li>
+              <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                  <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <h4 class="text-section">Authentication</h4>
+              </li>
+              
+              
+              <li class="nav-item">
+                <a th:href="@{/admin/login}">
+                  <i class="fas fa-file-signature"></i>
+                  <p>Log out</p>
+                </a>
+                
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="main-header">
+          <div class="main-header-logo">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="dark">
+              <a href="index.html" class="logo">
+                <img
+                  src="../assets/img/kaiadmin/logo_light.svg"
+                  alt="navbar brand"
+                  class="navbar-brand"
+                  height="20"
+                />
+              </a>
+              <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                  <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                  <i class="gg-menu-left"></i>
+                </button>
+              </div>
+              <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+              </button>
+            </div>
+            <!-- End Logo Header -->
+          </div>
+          <!-- Navbar Header -->
+          <nav
+            class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
+          >
+            <div class="container-fluid">
+              <nav
+                class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
+              >
+			  <form>
+                    <div class="input-group" style="width:600px; height:40px;">
+    					
+                      <div class="input-group-prepend">
+                        <button type="submit" class="btn btn-search pe-1">
+                          <i class="fa fa-search search-icon"></i>
+                        </button>
+                      </div>
+                      <input
+                        type="text"
+  					  id="searchInput" placeholder="Search by doctor email, ID, name, or specialty" class="form-control"
+                      />
+    				  
+                    </div>
+    				</form>
+              </nav>
+
+              <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                <li
+                  class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
+                >
+                  <a
+                    class="nav-link dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    role="button"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                  >
+                    <i class="fa fa-search"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-search animated fadeIn">
+                    <form class="navbar-left navbar-form nav-search">
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          placeholder="Search ..."
+                          class="form-control"
+                        />
+                      </div>
+                    </form>
+                  </ul>
+                </li>
+                <li class="nav-item topbar-icon dropdown hidden-caret">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="messageDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i class="fa fa-envelope"></i>
+                  </a>
+                </li>
+                <li class="nav-item topbar-icon dropdown hidden-caret">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="notifDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    <i class="fa fa-bell"></i>
+                    <span class="notification">4</span>
+                  </a>
+                  
+                </li>
+                <li class="nav-item topbar-icon dropdown hidden-caret">
+                  <a
+                    class="nav-link"
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    aria-expanded="false"
+                  >
+                    <i class="fas fa-layer-group"></i>
+                  </a>
+                </li>
+                <li class="nav-item topbar-user dropdown hidden-caret">
+                  <a
+                    class="dropdown-toggle profile-pic"
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    aria-expanded="false"
+                  >
+                    <div class="avatar-sm">
+                      <img
+                        src="../assets/img/profile.jpg"
+                        alt="..."
+                        class="avatar-img rounded-circle"
+                      />
+                    </div>
+                    <span class="profile-username" th:each="ad : ${admin}">
+                      <span class="op-7">Hi,</span>
+                      <span class="fw-bold" th:text="${ad.firstname}">Admin</span>
+                    </span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user animated fadeIn">
+                    <div class="dropdown-user-scroll scrollbar-outer">
+                      <li>
+                        <div class="user-box">
+                          <div class="avatar-lg">
+                            <img
+                              src="../assets/img/profile.jpg"
+                              alt="image profile"
+                              class="avatar-img rounded"
+                            />
+                          </div>
+                          <div class="u-text">
+                            <h4>Admin</h4>
+                            <p class="text-muted">View Your Profile Data</p>
+                            <a
+							href="#" 
+						   th:href="@{/admin/showAdminProfile}"
+                              class="btn btn-xs btn-secondary btn-sm"
+                              >View Profile</a
+                            >
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Logout</a>
+                      </li>
+                    </div>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <!-- End Navbar -->
+        </div>
+
+		<div class="container">
+		    <div class="page-inner">
+		        <div class="page-header">
+		            <h3 class="fw-bold mb-3">Doctor Informations</h3>
+		            <ul class="breadcrumbs mb-3">
+		                <li class="nav-home">
+		                    <a href="#">
+		                        <i class="icon-home"></i>
+		                    </a>
+		                </li>
+		                <li class="separator">
+		                    <i class="icon-arrow-right"></i>
+		                </li>
+		                <li class="nav-item">
+		                    <a href="#">Tables</a>
+		                </li>
+		                <li class="separator">
+		                    <i class="icon-arrow-right"></i>
+		                </li>
+		                <li class="nav-item">
+		                    <a href="#">Datatables</a>
+		                </li>
+		            </ul>
+		        </div>
+		        
+		       <!--  Search Bar 
+		        <div class="search-bar mb-3">
+		            <input type="text" id="searchInput" placeholder="Search by doctor email, ID, name, or specialty" class="form-control" />
+		        </div>-->
+
+		        <!-- Doctor Data Table -->
+		        <div class="row">
+		            <div class="col-md-12">
+		                <div class="card">
+		                    <div class="card-header">
+		                        <h4 class="card-title">Doctor Data</h4>
+		                    </div>
+		                    <div class="card-body">
+		                        <div class="table-responsive">
+		                            <table id="basic-datatables" class="display table table-striped table-hover">
+		                                <thead>
+		                                    <tr>
+		                                        <th>Doctor Id</th>
+		                                        <th>Doctor Name</th>
+		                                        <th>Email</th>
+		                                        <th>Contact Number</th>
+		                                        <th>Medical Specialty</th>
+		                                        <th>Years of Experience</th>
+		                                        <th>ConsultationFee</th>
+		                                        <th>Description</th>
+		                                        <th>Permission</th>
+		                                        <th style="width: 10%">Action</th>
+		                                    </tr>
+		                                </thead>
+		                                
+		                                <tbody>
+		                                    <tr th:each="doctor : ${doctors}">
+		                                        <td th:text="${doctor.doctorId}"></td>
+		                                        <td th:text="${doctor.firstname + ' ' + doctor.lastname}"></td>
+		                                        <td th:text="${doctor.email}"></td>
+		                                        <td th:text="${doctor.contactNumber}"></td>
+		                                        <td th:text="${doctor.specialty}"></td>
+		                                        <td th:text="${doctor.yearsOfExperience}"></td>
+		                                        <td th:text="${doctor.formattedConsultationFee}+' MMK'"></td>
+		                                        <td th:text="${doctor.description}"></td>
+		                                        <td>
+		                                            <div th:if="${!doctor.isVerified}">
+		                                                <span class="restrict">Restricted</span>
+		                                            </div>
+		                                            <div th:if="${doctor.isVerified}">
+		                                                <span class="access-granted">Access Granted</span>
+		                                            </div>
+		                                        </td>
+		                                        <td>
+		                                            <div th:if="${!doctor.isVerified}" class="form-button-action">
+		                                                <form th:action="@{/admin/confirmrequest/{id}(id=${doctor.doctorId})}" method="post">
+		                                                    <button type="submit" class="btn btn-update">Confirm<i class="fa fa-edit"></i></button>
+		                                                </form>
+		                                            </div>
+		                                            <div th:if="${doctor.isVerified}" class="form-button-action">
+		                                                <form th:action="@{/admin/doctorDelete/{id}(id=${doctor.doctorId})}" method="post">
+		                                                    <button type="submit" class="btn btn-delete">Delete<i class="fa fa-times"></i></button>
+		                                                </form>
+		                                            </div>
+		                                        </td>
+		                                    </tr>
+		                                </tbody>
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
+        
+
+        <footer class="footer">
+          <div class="container-fluid d-flex justify-content-between">
+            <nav class="pull-left">
+              <ul class="nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="http://www.themekita.com">
+                    CityStar
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"> Help </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"> Licenses </a>
+                </li>
+              </ul>
+            </nav>
+            <div class="copyright">
+              2024, made with <i class="fa fa-heart heart text-danger"></i> by
+              <a href="http://www.themekita.com">CityStar</a>
+            </div>
+            <div>
+              Distributed by
+              <a target="_blank" href="https://themewagon.com/">CityStar</a>.
+            </div>
+          </div>
+        </footer>
+      </div>
+
+      <!-- Custom template | don't include it in your project! -->
+      <div class="custom-template">
+        <div class="title">Settings</div>
+        <div class="custom-content">
+          <div class="switcher">
+            <div class="switch-block">
+              <h4>Logo Header</h4>
+              <div class="btnSwitch">
+                <button
+                  type="button"
+                  class="selected changeLogoHeaderColor"
+                  data-color="dark"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="blue"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="purple"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="light-blue"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="green"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="orange"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="red"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="white"
+                ></button>
+                <br />
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="dark2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="blue2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="purple2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="light-blue2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="green2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="orange2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeLogoHeaderColor"
+                  data-color="red2"
+                ></button>
+              </div>
+            </div>
+            <div class="switch-block">
+              <h4>Navbar Header</h4>
+              <div class="btnSwitch">
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="dark"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="blue"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="purple"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="light-blue"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="green"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="orange"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="red"
+                ></button>
+                <button
+                  type="button"
+                  class="selected changeTopBarColor"
+                  data-color="white"
+                ></button>
+                <br />
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="dark2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="blue2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="purple2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="light-blue2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="green2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="orange2"
+                ></button>
+                <button
+                  type="button"
+                  class="changeTopBarColor"
+                  data-color="red2"
+                ></button>
+              </div>
+            </div>
+            <div class="switch-block">
+              <h4>Sidebar</h4>
+              <div class="btnSwitch">
+                <button
+                  type="button"
+                  class="changeSideBarColor"
+                  data-color="white"
+                ></button>
+                <button
+                  type="button"
+                  class="selected changeSideBarColor"
+                  data-color="dark"
+                ></button>
+                <button
+                  type="button"
+                  class="changeSideBarColor"
+                  data-color="dark2"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="custom-toggle">
+          <i class="icon-settings"></i>
+        </div>
+      </div>
+      <!-- End Custom template -->
+    </div>
+    <!--   Core JS Files   -->
+    <!--<script src="../assets/js/core/jquery-3.7.1.min.js"></script>-->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Chart Circle -->
+    <script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="../assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+    <script src="../assets/js/plugin/jsvectormap/world.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="../assets/js/kaiadmin.min.js"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="../assets/js/setting-demo.js"></script>
+    <script src="../assets/js/demo.js"></script>
+    <script>
+      $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#177dff",
+        fillColor: "rgba(23, 125, 255, 0.14)",
+      });
+
+      $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#f3545d",
+        fillColor: "rgba(243, 84, 93, .14)",
+      });
+
+      $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+        type: "line",
+        height: "70",
+        width: "100%",
+        lineWidth: "2",
+        lineColor: "#ffa534",
+        fillColor: "rgba(255, 165, 52, .14)",
+      });
+    </script>
+	<script>
+	    document.getElementById('searchInput').addEventListener('input', function () {
+	        var filter = this.value.toLowerCase();
+	        var rows = document.querySelectorAll('#basic-datatables tbody tr');
+
+	        rows.forEach(function (row) {
+	            var idCell = row.cells[0]; // Doctor ID
+	            var nameCell = row.cells[1]; // Doctor Name
+	            var emailCell = row.cells[2]; // Email
+	            var specialtyCell = row.cells[4]; // Medical Specialty
+
+	            if (
+	                idCell.textContent.toLowerCase().indexOf(filter) > -1 ||
+	                nameCell.textContent.toLowerCase().indexOf(filter) > -1 ||
+	                emailCell.textContent.toLowerCase().indexOf(filter) > -1 ||
+	                specialtyCell.textContent.toLowerCase().indexOf(filter) > -1
+	            ) {
+	                row.style.display = ''; // Show the row if it matches
+	            } else {
+	                row.style.display = 'none'; // Hide the row if it doesn't match
+	            }
+	        });
+	    });
+	</script>
+  </body>
+</html>

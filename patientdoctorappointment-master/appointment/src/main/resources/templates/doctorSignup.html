@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="utf-8">
+      <title>Sign Up Page Doctor</title>
+      <style>
+		/* Importing Google Fonts - Poppins */
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+		* {
+		  margin: 0;
+		  padding: 0;
+		  box-sizing: border-box;
+		  font-family: 'Poppins', sans-serif;
+		}
+
+		body {
+		  height: 100vh;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  padding: 10px;
+		  background-size: cover;
+          background-image: url("https://external-preview.redd.it/JMWYV3NtnAzO6Ux56z4Pi56bM4WVESZ_cdIwacuEIzo.jpg?width=1080&crop=smart&auto=webp&s=86505f9ae35b09ecbda2bb93b7523c68a538904b");
+		}
+
+		.container {
+		  max-width: 800px;
+		  width: 100%;
+		  background-color: #fff;
+		  padding: 25px 30px;
+		  border-radius: 5px;
+		  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+		  height: 700px;
+				}
+
+		.container .title {
+		  font-size: 25px;
+		  font-weight: 500;
+		  position: relative;
+		}
+
+		.container .title::before {
+		  content: "";
+		  position: absolute;
+		  left: 0;
+		  bottom: 0;
+		  height: 3px;
+		  width: 30px;
+		  border-radius: 5px;
+		  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+		}
+
+		.content form .user-details {
+		  display: flex;
+		  flex-wrap: wrap;
+		  justify-content: space-between;
+		  margin: 20px 0 12px 0;
+		}
+
+		form .user-details .input-box {
+		  margin-bottom: 15px;
+		  width: calc(100% / 2 - 20px);
+		}
+
+		form .input-box span.details {
+		  display: block;
+		  font-weight: 500;
+		  margin-bottom: 5px;
+		}
+
+		.user-details .input-box input {
+		  height: 45px;
+		  width: 100%;
+		  outline: none;
+		  font-size: 16px;
+		  border-radius: 5px;
+		  padding-left: 15px;
+		  border: 1px solid #ccc;
+		  border-bottom-width: 2px;
+		  transition: all 0.3s ease;
+		}
+
+		.user-details .input-box input:focus,
+		.user-details .input-box input:valid {
+		  border-color: #9b59b6;
+		}
+
+		form .gender-details .gender-title {
+		  font-size: 20px;
+		  font-weight: 500;
+		}
+
+		form .category {
+		  display: flex;
+		  width: 80%;
+		  margin: 14px 0;
+		  justify-content: space-between;
+		}
+
+		form .category label {
+		  display: flex;
+		  align-items: center;
+		  cursor: pointer;
+		}
+
+		form .category label .dot {
+		  height: 18px;
+		  width: 18px;
+		  border-radius: 50%;
+		  margin-right: 10px;
+		  background: #d9d9d9;
+		  border: 5px solid transparent;
+		  transition: all 0.3s ease;
+		}
+
+		#dot-1:checked~.category label .one,
+		#dot-2:checked~.category label .two,
+		#dot-3:checked~.category label .three {
+		  background: #9b59b6;
+		  border-color: #d9d9d9;
+		}
+
+		form input[type="radio"] {
+		  display: none;
+		}
+
+		form .button {
+		  height: 45px;
+		  margin: 35px 0
+		}
+
+		form .button input {
+		  height: 100%;
+		  width: 100%;
+		  border-radius: 5px;
+		  border: none;
+		  color: #fff;
+		  font-size: 18px;
+		  font-weight: 500;
+		  letter-spacing: 1px;
+		  cursor: pointer;
+		  transition: all 0.3s ease;
+		  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+		}
+
+		form .button input:hover {
+		  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+		}
+
+		/* Responsive media query code for mobile devices */
+		@media(max-width: 584px) {
+		  .container {
+		    max-width: 100%;
+		  }
+
+		  form .user-details .input-box {
+		    margin-bottom: 15px;
+		    width: 100%;
+		  }
+
+		  form .category {
+		    width: 100%;
+		  }
+
+		  .content form .user-details {
+		    max-height: 300px;
+		    overflow-y: scroll;
+		  }
+
+		  .user-details::-webkit-scrollbar {
+		    width: 5px;
+		  }
+		}
+
+		/* Responsive media query code for mobile devices */
+		@media(max-width: 459px) {
+		  .container .content .category {
+		    flex-direction: column;
+		  }
+		}
+        .category {
+  font-family: Arial, sans-serif;
+  margin: 10px 0;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.button {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px; /* Optional spacing above the buttons */
+}
+
+input[type="submit"],
+input[type="reset"] {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+input[type="reset"] {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  opacity: 0.9; /* Slight opacity on hover */
+}
+
+	  </style>
+   </head>
+   <body>
+     <div class="container">
+       <!-- Title section -->
+       <div class="title">Doctor SignUp Page</div>
+       <div class="content">
+         <!-- Registration form -->
+         <form th:action="@{/doctor/registerprocessDoctor}" th:object="${doctor}" method="post">
+           <div class="user-details">
+             <!-- Input for Full Name -->
+			 <div class="input-box" style="width:800px; height:50px; margin-bottom: 25px;">
+                <span class="details">Profile Image</span>
+                <input type="file" id="profile" th:field="*{profile}" placeholder="Enter your Profile Image" required>
+              </div>
+             <div class="input-box">
+               <span class="details">First Name</span>
+               <input type="text" id="firstname" th:field="*{firstname}" placeholder="Enter your first name" required>
+             </div>
+             <!-- Input for Username -->
+             <div class="input-box">
+               <span class="details">Lastname</span>
+               <input type="text" id="lastname" th:field="*{lastname}" placeholder="Enter your lastname" required>
+             </div>
+             <!-- Input for Email -->
+             <div class="input-box">
+               <span class="details">Email</span>
+               <input type="email" id="email" th:field="*{email}" placeholder="Enter your email" required>
+             </div>
+             <div class="input-box">
+                <span class="details">Password</span>
+                <input type="password" id="password" th:field="*{password}" placeholder="Enter password" required>
+              </div>
+             <!-- Input for Phone Number -->
+             <div class="input-box">
+               <span class="details">Phone Number</span>
+               <input type="text" id="contactNumber" th:field="*{contactNumber}" placeholder="Enter your phone number" required>
+             </div>
+			 <div class="input-box">
+                <span class="details">Years of Experience</span>
+                <input type="number" id="yearsOfExperience" th:field="*{yearsOfExperience}" placeholder="Enter your Years of Experience" required>
+              </div>
+             <!-- Input for Password -->
+             <div class="input-box">
+               <span class="details">Specialty</span>
+               <input type="text" class="form-control" id="specialty" th:field="*{specialty}" placeholder="Enter Specialty" required>
+             </div>
+             <!-- Input for Confirm Password -->
+             <div class="input-box">
+               <span class="details">Consultation Fee</span>
+               <input type="number" id="consultationFee" th:field="*{consultationFee}" placeholder="Enter your Consultation Fee" required>
+             </div>
+			  <div class="input-box">
+                 <span class="details">Description</span>
+                 <input type="text" id="description" th:field="*{description}" placeholder="Enter medical history" required>
+               </div>
+           </div>
+		   
+             
+              
+           </div>
+		   
+          
+           <!-- Submit button -->
+           <div class="button">
+             <input type="submit" value="Register">
+             <input type="reset" value="Cancel">
+           </div>
+         </form>
+       </div>
+     </div>
+   </body>
+   </html>
